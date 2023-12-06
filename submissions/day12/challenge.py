@@ -11,6 +11,7 @@ class Dog:
     def show_details(self):
         print(f"Name: {self.__name}\nBreed: {self.__breed}\nColor: {self.__color}\nAge: {self.__age}")
 
-my_dog = Dog("Michico", "Dachshund", "Brown", 4)
-my_dog.bark()
-my_dog.show_details()
+if __name__ == "__main__":
+    my_dog = Dog("Michico", "Dachshund", "Brown", 4)
+    my_dog.bark()
+    my_dog.show_details()
