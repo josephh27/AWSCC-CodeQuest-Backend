@@ -1,0 +1,1 @@
+There are two versions of this mini project, one has a Graphical User Interface and one does not.
