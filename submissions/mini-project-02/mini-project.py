@@ -1,3 +1,4 @@
+# Version of project with command line interface only
 import json
 import sys
 

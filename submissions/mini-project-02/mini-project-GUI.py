@@ -1,3 +1,4 @@
+# Version of project with a graphical user interface
 from customtkinter import *
 from tkinter import messagebox
 from tkinter import ttk
