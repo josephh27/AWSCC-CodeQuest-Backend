@@ -9,8 +9,8 @@ headers = {
 }
 
 get_response = requests.get(endpoint_url, headers=headers)
-# print("GET RESPONSE DETAILS")
-# print(f"HTTP status code: {get_response.status_code}\nHeaders: {get_response.headers}\nContent: {get_response.content}\n\n")
+print("GET RESPONSE DETAILS")
+print(f"HTTP status code: {get_response.status_code}\nHeaders: {get_response.headers}\nContent: {get_response.text}\n\n")
 
 data = {
     'title': 'API Testing',
@@ -19,5 +19,5 @@ data = {
 
 post_response = requests.post(endpoint_url, json=data)
 print("POST RESPONSE DETAILS")
-print(f"HTTP status code: {post_response.status_code}\nContent: {post_response.content}")
+print(f"HTTP status code: {post_response.status_code}\nContent: {post_response.text}")
 
