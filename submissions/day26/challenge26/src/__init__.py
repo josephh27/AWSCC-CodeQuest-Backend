@@ -15,7 +15,8 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    from .views import views
+    from .views import views, faculty_views
     app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(faculty_views, url_prefix="/faculty")
 
     return app

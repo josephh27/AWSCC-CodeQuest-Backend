@@ -1,6 +1,6 @@
 import requests
 
-base_url = 'https://jsonplaceholder.typicode.com'
+base_url = 'http://127.0.0.1:5000/views/about'
 resource_path = '/posts'
 endpoint_url = base_url + resource_path
 
