@@ -9,17 +9,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# class Data(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100))
-#     email = db.Column(db.String(100))
-#     phone = db.Column(db.String(100))
-
-#     def __init__(self, name, email, phone):
-#         self.name = name
-#         self.email = email
-#         self.phone = phone
-
 class Credential(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     website = db.Column(db.String(255))
@@ -38,8 +27,12 @@ with app.app_context():
 def index():
     all_data = Credential.query.all()
     distinct_websites = Credential.query.with_entities(Credential.website).distinct()
+    credential_bucket = {}
     for website in distinct_websites:
-        print(website)
+        fetched_credentials = db.Credential.filter(db.Credential.website==website)
+        print(fetched_credentials)
+        # new_credentials = []
+        # credential_bucket[website[0]] = 
     return render_template("index.html", employees = all_data)
 
 @app.route('/insert', methods = ['POST'])
@@ -73,7 +66,7 @@ def update():
     
 @app.route('/delete/<id>/', methods = ['GET', 'POST'])
 def delete(id):
-    my_data = Credentials.query.get(id)
+    my_data = Credential.query.get(id)
     db.session.delete(my_data)
     db.session.commit()
     flash("Credential Deleted Successfully")
