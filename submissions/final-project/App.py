@@ -11,9 +11,9 @@ db = SQLAlchemy(app)
 
 class Credential(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    website = db.Column(db.String(255))
-    email = db.Column(db.String(255))
-    password = db.Column(db.String(255))
+    website = db.Column(db.String(255), nullable=False, unique=False)
+    email = db.Column(db.String(255), nullable=False, unique=False)
+    password = db.Column(db.String(255), nullable=False, unique=False)
 
     def __init__(self, website, email, password):
         self.website = website
@@ -25,15 +25,13 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    all_data = Credential.query.all()
     distinct_websites = Credential.query.with_entities(Credential.website).distinct()
     credential_bucket = {}
     for website in distinct_websites:
-        fetched_credentials = db.Credential.filter(db.Credential.website==website)
-        print(fetched_credentials)
-        # new_credentials = []
-        # credential_bucket[website[0]] = 
-    return render_template("index.html", employees = all_data)
+        fetched_credentials = Credential.query.filter(Credential.website == website[0]).all()
+        credential_bucket[website[0]] = fetched_credentials
+
+    return render_template("index.html", credentials = credential_bucket)
 
 @app.route('/insert', methods = ['POST'])
 def insert():

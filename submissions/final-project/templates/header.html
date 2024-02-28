@@ -6,6 +6,25 @@
 <div class="jumbotron p-3 red bg-light">
     <div class="well text-center">
         <h1>Python Flask CRUD Web Application Development</h1>
+        <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#modal-add">
+            Add New Credential
+        </button>
+        {% with messages = get_flashed_messages() %}
+
+                    {% if messages %}
+
+                    {% for message in messages %}
+
+                    <div class="alert alert-warning alert-dismissible fade show no-margin" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    {% endfor %}
+
+                    {% endif %}
+                    
+                    {% endwith %}
     </div>
 </div>
 {% endblock %}

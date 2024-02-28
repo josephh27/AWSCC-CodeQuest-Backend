@@ -4,32 +4,13 @@
 {% block title %} Home {% endblock %}
 
 {% block body %} 
+
     <div class="container">
         <div class="row">
             <div class="col md-12">
+                {% for credential in credentials %}  
                 <div class="jumbotron p-3">
-                    <h2>Manage <b>Credentials</b> 
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#modal-add">
-                            Add New Credential
-                        </button>
-                    </h2>   
-
-                    {% with messages = get_flashed_messages() %}
-
-                    {% if messages %}
-
-                    {% for message in messages %}
-
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        {{message}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-
-                    {% endfor %}
-
-                    {% endif %}
-                    
-                    {% endwith %}
+                    <h2><b>{{credential}}</b></h2>                       
 
                     <table class="table table-hover table-dark">
                         <tr>
@@ -39,7 +20,7 @@
                             <th>Password</th>
                             <th>Action</th>
                         </tr>
-                        {% for row in employees %}
+                        {% for row in credentials[credential] %}
                         <tr>
                             <td>{{row.id}}</td>
                             <td>{{row.website}}</td>
@@ -121,6 +102,7 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
