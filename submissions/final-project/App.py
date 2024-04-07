@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from os import path  
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/crud"
+DB_NAME = "crud.db"
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/crud"
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

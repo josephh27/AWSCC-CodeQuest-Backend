@@ -5,105 +5,105 @@
 
 {% block body %} 
 
-    <div class="container">
-        <div class="row">
-            <div class="col md-12">
-                {% for credential in credentials %}  
-                <div class="jumbotron p-3">
-                    <h2><b>{{credential}}</b></h2>                       
+<div class="container">   
+    <div class="row">
+        <div class="col md-12">
+            {% for credential in credentials %}  
+            <div class="jumbotron p-3">
+                <h2><b>{{credential}}</b></h2>                       
 
-                    <table class="table table-hover table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Website</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Action</th>
-                        </tr>
-                        {% for row in credentials[credential] %}
-                        <tr>
-                            <td>{{row.id}}</td>
-                            <td>{{row.website}}</td>
-                            <td>{{row.email}}</td>
-                            <td>{{row.password}}</td>
-                            <td>
-                                <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#modal-edit{{row.id}}">Edit</a>
-                                <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
-                            </td>
-                        </tr>
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Website</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for row in credentials[credential] %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.website}}</td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.password}}</td>
+                        <td>
+                            <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#modal-edit{{row.id}}">Edit</a>
+                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
+                        </td>
+                    </tr>
 
-                        <!-- Modal Edit Credential -->
-                        <div id="modal-edit{{row.id}}" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Edit Credential</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{url_for('update')}}" method="POST">
-                                            <div class="form-group">
-                                                <label>Website:</label>
-                                                <input type="hidden" name="id" value="{{row.id}}">
-                                                <input type="text" class="form-control" name="website" required="1" value="{{row.website}}">                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email:</label>
-                                                <input type="email" class="form-control" name="email" required="1" value="{{row.email}}">                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Password:</label>
-                                                <input type="text" class="form-control" name="password" required="1" value="{{row.password}}">                                
-                                            </div>                                        
-                                            <div class="form-group">
-                                                <button class="btn btn-primary" type="submit">Update</button>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>                                    
-                                        </form>
-                                    </div>
+                    <!-- Modal Edit Credential -->
+                    <div id="modal-edit{{row.id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Credential</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{url_for('update')}}" method="POST">
+                                        <div class="form-group">
+                                            <label>Website:</label>
+                                            <input type="hidden" name="id" value="{{row.id}}">
+                                            <input type="text" class="form-control" name="website" required="1" value="{{row.website}}">                                
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email:</label>
+                                            <input type="email" class="form-control" name="email" required="1" value="{{row.email}}">                                
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Password:</label>
+                                            <input type="text" class="form-control" name="password" required="1" value="{{row.password}}">                                
+                                        </div>                                        
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">Update</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        {% endfor %}
-                    </table>
-                </div>
-
-                <!-- Modal Add Credential -->
-                <div id="modal-add" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add Credential</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{url_for('insert')}}" method="POST">
-                                    <div class="form-group">
-                                        <label>Website:</label>
-                                        <input type="text" class="form-control" name="website" required="1">                                
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email:</label>
-                                        <input type="email" class="form-control" name="email" required="1">                                
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password:</label>
-                                        <input type="text" class="form-control" name="password" required="1">                                
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Add Credential</button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>                                    
-                                </form>
-                            </div>
-                        </div>
                     </div>
+
+                    {% endfor %}
+                </table>
+            </div>           
+            {% endfor %}
+           
+        </div>
+    </div>
+     <!-- Modal Add Credential -->
+     <div id="modal-add" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Credential</h4>
                 </div>
-                {% endfor %}
+                <div class="modal-body">
+                    <form action="{{url_for('insert')}}" method="POST">
+                        <div class="form-group">
+                            <label>Website:</label>
+                            <input type="text" class="form-control" name="website" required="1">                                
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" name="email" required="1">                                
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="text" class="form-control" name="password" required="1">                                
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Add Credential</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>                                    
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %} 
